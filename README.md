@@ -3,11 +3,15 @@ SWPepNovo: An Efficient De Novo Peptide Sequencing Tool for Large-scale MS/MS Sp
 
 Introduction： As the number of the MS/MS spectra increases rapidly, the excessive computation time taken by MS/MS spectra data analysis has become a critical concern in computational biology. In this work, we designed and implemented SWPepNovo, an efficient de novo peptide sequencing tool for large-scale MS/MS spectra data analysis using a novel peptide-spectrum matches (PSMs) algorithm. To achieve the high performance, we designed an improved scoring algorithm to reduce the time complexity and eliminate the data dependence to enable all possible locality and vectorizations. Performance is also tuned by pre-fetching, double buffering mechanism, and an optimized memory access scheme, to achieve an optimum performance and best utilization of various computing resources within neo-heterogeneous many-core architecture.
 
-SWPepNovo is a C++ program designed to accelerate large-scale de novo peptide sequencing . We assume that reader is familiar with C++ to some extent and is able to run C++ programs.
+SWPepNovo is a C++ program designed to accelerate large-scale de novo peptide sequencing . We assume that reader is familiar with C++ to some extent and is able to run C++ programs. Considering that some users do not have access to the Sunway TaihuLight supercomputer, we have offered a MPI version of SWPepNovo.
+
+#Availability
+
+#1 Sunway TaihuLight with SW26010
 
 Installation and Requirements
 
-CPU | SW2610 processor
+CPU | SW26010 processor
 
 Processor Node | 4 CGs (4 MPEs and 256 CPEs)
 
@@ -20,3 +24,12 @@ Compile language | C, C++, Fortran
 Parallel programming interface | MPI 3.0, OpenMP 3.1, OpenACC 2.0
 
 Usage: eg: bsub –I –b –q queue_name –n 1 –cgsp 64 –share_size 4096 –host_stack 128 ./SWPepNovo input-path output-path ...
+
+
+#2 MPI Cluster
+Installation and Requirements
+We assume that readers are familiar with MPI to some extent and are able to run MPI programs. We recommend at least 8GB of memory for workflows involving standard tryptic digestions.
+
+Usage:
+
+eg: mpirun -np <number of processes> -f servers ./SWPepNovo input-path output-path ...
